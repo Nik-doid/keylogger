@@ -27,23 +27,30 @@ class TransparentOverlay(QMainWindow):
 
         self.idle_img = pygame.transform.scale(self.idle_img, (300, 200))
         self.hit_img = pygame.transform.scale(self.hit_img, (300, 200))
-        self.idle_img = pygame.transform.rotate(self.idle_img, 10)
+        self.idle_img = pygame.transform.rotate(self.idle_img, 13)
 
         self.current_img = self.idle_img
         self.hit_timer = 0
 
         # Keyboard layout and rectangles
         self.key_layout = [
-            ["ESC", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "BACKSPACE"],
-            ["TAB", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
-            ["CAPS", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "ENTER"],
-            ["SHIFT", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "SHIFT"],
-            ["CTRL", "WIN", "ALT", "SPACE", "ALTGR", "MENU", "CTRL"]
-        ]
+  ["ESC","1","2","3","4","5","6","7","8","9","0","-","=","BACKSPACE"],
+  ["TAB","Q","W","E","R","T","Y","U","I","O","P","[","]","\\"],
+  ["CAPS","A","S","D","F","G","H","J","K","L",";", "'", "ENTER"],
+  ["LSHIFT","Z","X","C","V","B","N","M",",",".","/","RSHIFT"],
+  ["LCTRL","LWIN","LALT","SPACE","RALT","Fn","PRINT","RCTRL"],
+]
+
         self.special_width = {
-            "SPACE": 6, "SHIFT": 2.5, "ENTER": 2.5, "BACKSPACE": 2.5,
-            "TAB": 2, "CAPS": 2, "CTRL": 1.5, "WIN": 1.5, "ALT": 1.5, "ALTGR": 1.5, "MENU": 1.5, "ESC": 1.5
-        }
+  "SPACE": 6.25,
+  "LSHIFT": 2.75, "RSHIFT": 2.75,
+  "ENTER": 1,
+  "TAB": 1.5, "CAPS": 1.75,
+  "LCTRL": 1.25, "LWIN": 1.25, "LALT": 1.25,
+  "RALT": 1.25, "RWIN": 1.25, "MENU": 1.25, "RCTRL": 1.25,
+  "BACKSPACE": 2, "ESC": 1.25
+}
+
         self.key_rects = self.generate_keys()
 
         # Track key presses
@@ -60,7 +67,7 @@ class TransparentOverlay(QMainWindow):
 
     def generate_keys(self):
         font = pygame.font.SysFont("Arial", 16)
-        key_w, key_h = 60, 40
+        key_w, key_h = 35, 25
         spacing = 5
         start_y = 180
         keys = []
@@ -96,7 +103,7 @@ class TransparentOverlay(QMainWindow):
             self.surface.blit(self.hit_img, (cat_x, cat_y))
             self.hit_timer -= dt
         else:
-            center_x = self.width() // 2 - self.idle_img.get_width() // 2
+            center_x = self.width() // 4 - self.idle_img.get_width() // 2
             self.surface.blit(self.idle_img, (center_x, 10))
 
 
