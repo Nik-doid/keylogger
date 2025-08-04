@@ -40,4 +40,5 @@ QT_QPA_PLATFORM=xcb python3 bongocat.py
 
 ---
 
+## Demo
 ![Demo](demo.gif)
